@@ -8,8 +8,7 @@ import Login from "./page/Login";
 // import ForgetPassword from "./Page/ForgetPassword";
 import Dashboard from "./page/Dashboard";
 import ViewForm from "./page/ViewForm";
-// import UserView from "./Component/UserView/UserView";
-// import UserData from "./Page/UserData";
+import UserData from "./page/UserData";
 
 function App() {
   const authContextValue = useContext(AuthContext);
@@ -28,9 +27,9 @@ function App() {
         {authContextValue.loggedIn && (
           <Route path="/dashboard/form" element={<Form />} />
         )}
-        {/* {authContextValue.loggedIn && (
+        {authContextValue.loggedIn && (
           <Route path="/dashboard/data/:id" element={<UserData />} />
-        )} */}
+        )}
       </Routes>
     </BrowserRouter>
   );

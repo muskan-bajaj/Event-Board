@@ -1,0 +1,20 @@
+.userDataPage{
+    /* background-color: green; */
+    padding: 45px 52px;
+}
+
+.total{
+    color: #6BFFB3;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 30px;
+}
+
+.elementCard{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+}
