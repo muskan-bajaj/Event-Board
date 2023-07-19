@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../store/AuthContext";
 
-import "./LoginPage.css";
+import loginCSS from "./LoginPage.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -48,10 +48,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bkgrd">
-      <form className="login">
+    <div className={loginCSS.bkgrd}>
+      <form className={loginCSS.login}>
         {/* <div className="loginForm"> */}
-        <div className="emailInput">
+        <div className={loginCSS.emailInput}>
           <label for="email">Email</label>
           <input
             type="email"
@@ -61,7 +61,7 @@ export default function LoginPage() {
             value={email}
           />
         </div>
-        <div className="passwordInput">
+        <div className={loginCSS.passwordInput}>
           <label for="password">Password</label>
           <input
             type="password"
@@ -71,15 +71,15 @@ export default function LoginPage() {
             value={password}
           />
         </div>
-        <div className="forgetPassword">
+        <div className={loginCSS.forgetPassword}>
           <div></div>
           <Link to="/forgetPassword" style={{ textDecoration: "none" }}>
-            <div className="fpLink">Forgot Password?</div>
+            <div className={loginCSS.fpLink}>Forgot Password?</div>
           </Link>
         </div>
-        <div className="signIn">
-          {error && <div className="loginError">{error}</div>}
-          <button className="signInButton" onClick={handleSubmit}>
+        <div className={loginCSS.signIn}>
+          {error && <div className={loginCSS.loginError}>{error}</div>}
+          <button className={loginCSS.signInButton} onClick={handleSubmit}>
             Log In
           </button>
         </div>
