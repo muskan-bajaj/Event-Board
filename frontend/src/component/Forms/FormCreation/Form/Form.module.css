@@ -1,0 +1,112 @@
+.registrationForm{
+    margin: 65px 72px 0px;
+    border-radius: 8px;
+    background: #262626;
+    padding: 36px 120px;
+}
+
+.formName{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 500;
+    text-decoration-line: underline;
+}
+
+.FormHeadingFields,.formFields,.createFormButton,.addField{
+    margin-top: 20px;
+}
+
+.FormHeadingFields{
+    display: flex;
+    justify-content: space-between;
+}
+
+.formTitle,.formDescription{
+    display: flex;
+    width: 45%;
+}
+
+.formTitle select, .formDescription input{
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    font-size: medium;
+    color: white;
+    padding: 10px;
+}
+
+.formTitle select:required:invalid {
+    color: gray;
+}
+
+.formTitle select option {
+  color: white;
+  background-color: #262626;
+}
+
+.formDescription input, #fTitle{
+    width: 100%;
+}
+
+.AF{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: medium;
+    margin-bottom: 15px;
+}
+
+.createFormButton{
+    display: flex;
+    justify-content: space-between;
+}
+
+.createFormButton button{
+    padding: 8px 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0BA757;
+    cursor: pointer;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 18px;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.modal{
+    background-color: black;
+    height: 70%;
+    width: 50%;
+    position: absolute;
+    z-index: 2;
+    top: 60px;
+    left: 300px;
+    color: white;
+}
+
+.modalActive{
+    display: block;
+}
+
+.modalInactive{
+    display: none;
+}
+
+.formConfirm{
+    margin-left: 85%;
+    margin-top: 85%;
+}

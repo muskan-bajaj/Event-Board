@@ -1,161 +1,164 @@
-import React, { useEffect, useState,useContext } from 'react'
-import { AuthContext } from '../../../Context/Context'
-import Fields from '../Fields/Fields'
-import ViewForm from '../../../ViewForm/ViewForm'
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../../../store/AuthContext";
+import Fields from "../Fields/Fields";
+// import ViewForm from '../../../ViewForm/ViewForm'
 
-import './Form.css'
+import formCSS from "./Form.module.css";
 // import PreviousForm from '../../../PreviousForm/PreviousForm'
 
 export default function Form() {
-    const [fieldNo,setFieldNo]=useState([[1]]);
-    const [formName,setFormName]=useState('')
-    const [formDes,setFormDes]=useState('')
-    const [error,setError]=useState(null)
+  const [fieldNo, setFieldNo] = useState([[1]]);
+  const [formName, setFormName] = useState("");
+  const [formDes, setFormDes] = useState("");
+  const [error, setError] = useState(null);
 
-    const [modal,setModal]=useState('modalInactive')
+  const [modal, setModal] = useState(formCSS.modalInactive);
 
-    const authContextValue=useContext(AuthContext)
-    let fields = authContextValue.fields
-    const noticeArray=authContextValue.notices
+  const authContextValue = useContext(AuthContext);
+  let fields = authContextValue.fields;
+  const noticeArray = authContextValue.notices;
 
-    var noticeID
+  var noticeID;
 
-    const handleAddField=async()=>{
-        setFieldNo(prevState => [...prevState, [1]])
-    }
+  const handleAddField = async () => {
+    setFieldNo((prevState) => [...prevState, [1]]);
+  };
 
-    useEffect(() => {
-        console.log(fieldNo);
-    }, [fieldNo]);
+  useEffect(() => {
+    console.log(fieldNo);
+  }, [fieldNo]);
 
-    const sumbitFunction=async(e)=>{
-        const userID=localStorage.getItem('id');
-        for(var i=0;i<noticeArray.length;i++){
-            for(var element in noticeArray[i]){
-              if(element==='eventName'){
-                if(noticeArray[i][element]===formName){
-                    noticeID=noticeArray[i]['_id']
-                }
-              }
-            }
+  const sumbitFunction = async (e) => {
+    const userID = localStorage.getItem("id");
+    for (var i = 0; i < noticeArray.length; i++) {
+      for (var element in noticeArray[i]) {
+        if (element === "eventName") {
+          if (noticeArray[i][element] === formName) {
+            noticeID = noticeArray[i]["_id"];
           }
-        const formDetails={userID,noticeID,formName,formDes,fields}
-        const response=await fetch("/api/form",{
-            method:'POST',
-            body:JSON.stringify(formDetails),
-            headers:{
-                "Content-Type":"application/json"
-            }
-        })
-
-        const json=await response.json()
-
-        if(!response.ok){
-            setError(json.error)
         }
-        if(response.ok){
-            setFormName('')
-            setFormDes('')
-            setError(null)
-        }
-       
+      }
     }
+    const formDetails = { userID, noticeID, formName, formDes, fields };
+    const response = await fetch("/api/form", {
+      method: "POST",
+      body: JSON.stringify(formDetails),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    const confirm=async(e)=>{
-        const userID=localStorage.getItem('id');
-        for(var i=0;i<noticeArray.length;i++){
-            for(var element in noticeArray[i]){
-              if(element==='eventName'){
-                if(noticeArray[i][element]===formName){
-                    noticeID=noticeArray[i]['_id']
-                }
-              }
-            }
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      setFormName("");
+      setFormDes("");
+      setError(null);
+    }
+  };
+
+  const confirm = async (e) => {
+    const userID = localStorage.getItem("id");
+    for (var i = 0; i < noticeArray.length; i++) {
+      for (var element in noticeArray[i]) {
+        if (element === "eventName") {
+          if (noticeArray[i][element] === formName) {
+            noticeID = noticeArray[i]["_id"];
           }
-        const formDetails={userID,noticeID,formName,formDes,fields}
-        const response=await fetch("/api/form",{
-            method:'POST',
-            body:JSON.stringify(formDetails),
-            headers:{
-                "Content-Type":"application/json"
-            }
-        })
-
-        const json=await response.json()
-
-        if(!response.ok){
-            setError(json.error)
         }
-        if(response.ok){
-            setFormName('')
-            setFormDes('')
-            setError(null)
-        }
+      }
+    }
+    const formDetails = { userID, noticeID, formName, formDes, fields };
+    const response = await fetch("/api/form", {
+      method: "POST",
+      body: JSON.stringify(formDetails),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        setModal('modalInactive')
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      setFormName("");
+      setFormDes("");
+      setError(null);
     }
 
-    const previewHandler=async(e)=>{
-        setModal('modalActive')
-    }
+    setModal(formCSS.modalInactive);
+  };
 
-    const cross=async(e)=>{
-        setModal('modalInactive')
-    }
+  const previewHandler = async (e) => {
+    setModal(formCSS.modalActive);
+  };
 
-    return (
+  const cross = async (e) => {
+    setModal(formCSS.modalInactive);
+  };
+
+  return (
     <>
-    <div className='registrationForm'>
-        <div className="automatedFormHeading">
-            <div className="formHeadingText">Form Heading</div>
-            <div className="FormHeadingFields">
-                <div className="formTitle">
-                    <label htmlFor="fTitle" className='headingLabelFT'>Form Title:</label>
-                    <select name="eventType" id="fTitle" onChange={(e)=>setFormName(e.target.value)} value={formName}>
-                        <option>
-                            Select event
-                        </option>
-                        {noticeArray.map(data=>(
-                            <option value={data.eventName}>
-                                {data.eventName}
-                            </option>
-                        ))}
-                </select>  
-                </div>
-                <div className="formDescription">
-                    <label htmlFor="fDescription" className='headingLabelFD'>Form Description: </label>
-                    <input type="text" id='fDescription'  onChange={(e)=>setFormDes(e.target.value)} value={formDes}/>
-                </div>
-            </div>
+      <div className={formCSS.registrationForm}>
+        <div className={formCSS.formName}>Create Form</div>
+        <div className={formCSS.FormHeadingFields}>
+          <div className={formCSS.formTitle}>
+            <select
+              required
+              name="eventType"
+              id={formCSS.fTitle}
+              onChange={(e) => setFormName(e.target.value)}
+              value={formName}
+            >
+              <option value="" hidden>
+                Form Title
+              </option>
+              {noticeArray.map((data) => (
+                <option value={data.eventName}>{data.eventName}</option>
+              ))}
+            </select>
+          </div>
+          <div className={formCSS.formDescription}>
+            <input
+              type="text"
+              id={formCSS.fDescription}
+              placeholder="Form Description"
+              onChange={(e) => setFormDes(e.target.value)}
+              value={formDes}
+            />
+          </div>
         </div>
-        <div className="formFields">
-            <div className="formHeadingText">Add Fields</div>
-            {fieldNo.map((e)=>(
-                <Fields/>
-                // <Fields fieldDisable={fieldDisable} createForm={createForm}/>
-            ))}
-            <div className="addField">
-                <button className='AF' onClick={handleAddField}>+ ADD FIELD</button>
-            </div>
+        <div className={formCSS.formFields}>
+          {fieldNo.map((e) => (
+            <Fields />
+          ))}
+          <div className={formCSS.addField}>
+            <button className={formCSS.AF} onClick={handleAddField}>
+              + ADD FIELD
+            </button>
+          </div>
         </div>
-        <div className="createFormButton">
-            <button onClick={previewHandler}>Preview Form</button>
-            <button onClick={sumbitFunction}>Create Form</button>
+        <div className={formCSS.createFormButton}>
+          <button onClick={previewHandler}>Preview Form</button>
+          <button onClick={sumbitFunction}>Create Form</button>
         </div>
-    </div>
+      </div>
 
-    {/* <div> */}
-        {/* <PreviousForm/> */}
-    {/* </div> */}
-
-    <div className={modal}>
-        <div className="overlay"></div>
-        <div className="modal">
-            <ViewForm name={formName} description={formDes} formFields={fields}/>
-            <button onClick={cross}>X</button>
-            <button onClick={confirm} className='formConfirm'>Confirm</button>
+      <div className={modal}>
+        <div className={formCSS.overlay}></div>
+        <div className={formCSS.modal}>
+          {/* <ViewForm name={formName} description={formDes} formFields={fields} /> */}
+          <button onClick={cross}>X</button>
+          <button onClick={confirm} className={formCSS.formConfirm}>
+            Confirm
+          </button>
         </div>
-    </div>
+      </div>
     </>
-  )
+  );
 }

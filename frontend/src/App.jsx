@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./store/AuthContext";
 import Navbar from "./component/NavBar/Navbar";
-// import Form from "./Component/Form/CreateForm/Form/Form";
+import Form from "./page/AdminForm";
 import Home from "./page/Home";
 import Login from "./page/Login";
 // import ForgetPassword from "./Page/ForgetPassword";
 import Dashboard from "./page/Dashboard";
-// import ViewForm from "./Page/ViewForm";
+import ViewForm from "./page/ViewForm";
 // import UserView from "./Component/UserView/UserView";
 // import UserData from "./Page/UserData";
 
@@ -24,9 +24,11 @@ function App() {
         {authContextValue.loggedIn && (
           <Route path="/dashboard" element={<Dashboard />} />
         )}
-        {/* <Route path="/dashboard/form/:id" element={<ViewForm />} />
-        <Route path="/dashboard/form" element={<Form />} />
+        <Route path="/dashboard/form/:id" element={<ViewForm />} />
         {authContextValue.loggedIn && (
+          <Route path="/dashboard/form" element={<Form />} />
+        )}
+        {/* {authContextValue.loggedIn && (
           <Route path="/dashboard/data/:id" element={<UserData />} />
         )} */}
       </Routes>
