@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import navCSS from "./Navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../Context/Context";
+import { AuthContext } from "../../store/AuthContext";
 // import RegistrationForm from '../Form/RegistrationForm/RegistrationForm';
 // import Form from '../../Page/Form';
 
 export default function Navbar() {
-  // const authContextValue=useContext(AuthContext);
+  const authContextValue = useContext(AuthContext);
   const redirect = useNavigate();
 
   const handleLogin = async () => {
@@ -21,13 +21,13 @@ export default function Navbar() {
   };
 
   const handleLogout = async () => {
-    // authContextValue.setLoggedIn(false);
+    authContextValue.setLoggedIn(false);
     localStorage.removeItem("onLogin");
     // authContextValue.setOnLogin(false);
     localStorage.removeItem("id");
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    // authContextValue.setFields([]);
+    authContextValue.setFields([]);
     redirect("/");
   };
 
