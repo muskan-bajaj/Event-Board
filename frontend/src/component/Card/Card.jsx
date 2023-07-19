@@ -36,18 +36,22 @@ export default function Card(props) {
           <div className={cardCSS.eventName}>{props.element.eventName}</div>
           <div className={cardCSS.eventDes}>{props.element.eventDes}</div>
         </div>
-        <div className={cardCSS.button}>
-          <button className={cardCSS.fillForm} onClick={fetchForm}>
-            Form
-          </button>
-          {authContextValue.loggedIn ? (
-            <button className={cardCSS.fillForm} onClick={data}>
-              Registrations
+        {props.form ? (
+          <div className={cardCSS.button}>
+            <button className={cardCSS.fillForm} onClick={fetchForm}>
+              Form
             </button>
-          ) : (
-            <></>
-          )}
-        </div>
+            {authContextValue.loggedIn ? (
+              <button className={cardCSS.fillForm} onClick={data}>
+                Registrations
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 
 export default function Notice() {
   const [notice, setNotice] = useState(null);
+  const [array, setArray] = useState([]);
 
   useEffect(() => {
     const fetchNotice = async () => {
@@ -15,6 +16,18 @@ export default function Notice() {
         setNotice(noticeJson);
       }
     };
+    const array = [];
+    const formExist = async () => {
+      const data = await fetch("/api/form");
+      const json = await data.json();
+
+      for (var i = 0; i < json.length; i++) {
+        array.push(json[i].noticeID);
+      }
+      setArray(array);
+    };
+
+    formExist();
     fetchNotice();
   }, []);
 
@@ -22,8 +35,12 @@ export default function Notice() {
     <div className={homeCSS.background}>
       <div className={homeCSS.cardElementHome}>
         {notice &&
-          notice.map((data) => {
-            return <Card key={data._id} element={data} />;
+          notice.map((data, i) => {
+            var button;
+            if (array.includes(data._id)) {
+              button = true;
+            }
+            return <Card key={data._id} element={data} form={button} />;
           })}
       </div>
     </div>

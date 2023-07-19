@@ -8,6 +8,7 @@ import Form from "../Forms/NoticeCreation/Form";
 
 export default function DashboardPage() {
   const [notice, setNotice] = useState(null);
+  const [array, setArray] = useState([]);
 
   const authContextValue = useContext(AuthContext);
 
@@ -15,6 +16,7 @@ export default function DashboardPage() {
   var objectArray = [];
 
   useEffect(() => {
+    const array = [];
     const fetchNotice = async () => {
       const noticeF = await fetch("/api/notices");
       const noticeJson = await noticeF.json();
@@ -29,9 +31,20 @@ export default function DashboardPage() {
           }
         }
       }
-      // console.log(objectArray)
+
       setNotice(objectArray);
     };
+    const formExist = async () => {
+      const data = await fetch("/api/form");
+      const json = await data.json();
+
+      for (var i = 0; i < json.length; i++) {
+        array.push(json[i].noticeID);
+      }
+      setArray(array);
+    };
+
+    formExist();
     fetchNotice();
   }, [notice]);
 
@@ -44,7 +57,11 @@ export default function DashboardPage() {
       <div className={dashboardCSS.notices}>
         {notice &&
           notice.map((data) => {
-            return <Card key={data._id} element={data} />;
+            var button;
+            if (array.includes(data._id)) {
+              button = true;
+            }
+            return <Card key={data._id} element={data} form={button} />;
           })}
       </div>
       <Form />
