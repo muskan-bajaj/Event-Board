@@ -19,8 +19,9 @@ body{
 
 .login{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    width: 20%;
 }
 
 .loginB{
@@ -28,6 +29,23 @@ body{
     border-radius: 5px;
     border: none;
     background-color: #0BA757;
+    cursor: pointer;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 18px;
+}
+
+.formLogout{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logoutB{
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: white 1px solid;
+    background-color: transparent;
     cursor: pointer;
     color: #FFF;
     font-family: Montserrat;

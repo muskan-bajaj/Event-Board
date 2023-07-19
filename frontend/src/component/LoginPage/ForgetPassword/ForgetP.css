@@ -1,0 +1,32 @@
+.email, .password{
+    width: 15vw !important;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+}
+
+.emailOTP{
+    display: flex;
+    justify-content: space-between;
+}
+
+.otp{
+    /* background-color: yellow; */
+    width: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-bottom: 0; */
+}
+
+#otp{
+    width: 5vw;
+    /* display: flex;
+    justify-content: center; */
+}
+
+/* .emailInput{
+    background-color: red;
+} */

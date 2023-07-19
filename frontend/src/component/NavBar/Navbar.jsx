@@ -49,14 +49,14 @@ export default function Navbar() {
 
       <div className={navCSS.login}>
         {localStorage.getItem("id") ? (
-          <>
+          <div className={navCSS.formLogout}>
             <Link to="/dashboard/form" style={{ textDecoration: "none" }}>
               <button className={navCSS.loginB}>Forms</button>
             </Link>
-            <button className={navCSS.loginB} onClick={handleLogout}>
+            <button className={navCSS.logoutB} onClick={handleLogout}>
               Logout
             </button>
-          </>
+          </div>
         ) : (
           <>
             {localStorage.getItem("onLogin") ? (
