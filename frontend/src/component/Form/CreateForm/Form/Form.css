@@ -1,0 +1,159 @@
+.registrationForm{
+    background-color: black;
+    /* height: 100vh; */
+    height: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    /* margin-bottom: 23px; */
+}
+
+.automatedFormHeading,.formFields,.createFormButton{
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 10px;
+    background-color: #1DB954;
+    color: white;
+    border-radius: 20px;
+}
+
+.FormHeadingFields{
+    display: flex;
+    justify-content: space-between;
+}
+
+.formHeadingText{
+    margin-left: 15px;
+    font-size: xx-large;
+    line-height: 60px;
+    text-decoration: underline;
+}
+
+.headingLabelFD,.headingLabelFT{
+    width: 150px;
+    font-weight: 400;
+    font-size: larger;
+}
+
+.headingLabelFT{
+    width: 95px;
+}
+
+.formTitle,.formDescription{
+    height: 40px;
+    display: flex;
+    margin-left: 15px;
+}
+
+.formDescription{
+    margin-right: 15px;
+}
+
+#fTitle,#fDescription{
+    height: 24px;
+}
+
+.formTitle select{
+    background-color: transparent;
+    border: 1px white solid;
+    border-radius: 5px;
+    font-size: medium;
+    color: white;
+    /* height: 24px; */
+    padding: 1px 2px;
+}
+
+.formTitle select option{
+    background-color: black;
+}
+
+.formDescription input{
+    background-color: transparent;
+    border: 1px white solid;
+    border-radius: 5px;
+    width: 300px;
+    /* cursor: pointer; */
+}
+
+.formFields,.createFormButton{
+    margin-top: 2.5vw;
+    /* padding-bottom: 2.5vw; */
+}
+
+.addField{
+    margin-left: 15px;
+    margin-top: 10px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* cursor: pointer; */
+}
+
+.AF{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px white solid;
+    color: white;
+    font-size: medium;
+    margin-bottom: 15px;
+}
+
+.AF:hover{
+    font-size: large;
+}
+
+.createFormButton{
+    background-color: transparent;
+}
+
+.createFormButton button{
+    background-color: #1DB954;
+    border: none;
+    color: white;
+    padding: 15px;
+    font-size: large;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.createFormButton button:hover{
+    background-color: #1db954b0;
+    /* font-size: 20px; */
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.modal{
+    background-color: black;
+    height: 70%;
+    width: 50%;
+    position: absolute;
+    z-index: 2;
+    top: 60px;
+    left: 300px;
+    color: white;
+}
+
+.modalActive{
+    display: block;
+}
+
+.modalInactive{
+    display: none;
+}
+
+.formConfirm{
+    margin-left: 85%;
+    margin-top: 85%;
+}

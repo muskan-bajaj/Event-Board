@@ -1,0 +1,75 @@
+.registrationField{
+    border: 2px white solid;
+    border-radius: 10px;
+    /* background-color: black; */
+    margin-left: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.done{
+    padding: 12px;
+}
+
+.fieldName,.fieldDataType,.fieldMandate{
+    /* height: 40px; */
+    display: flex;
+    margin-left: 15px;
+    /* background-color: black; */
+    width: auto;
+}
+
+.fieldName input,.fieldMandate input{
+    background-color: transparent;
+    border: 1px white solid;
+    border-radius: 5px;
+    /* width: 300px; */
+    height: 24px;
+}
+
+.fieldDataType select{
+    background-color: transparent;
+    border: 1px white solid;
+    border-radius: 5px;
+    font-size: medium;
+    color: white;
+    /* height: 24px; */
+    padding: 1px 2px;
+}
+
+.fieldDataType select option{
+    background-color: black;
+}
+
+input[type="checkbox" i]{
+    height: 17px;
+    width: 17px;
+    cursor: pointer;
+}
+
+.FN,.FDT,.FM{
+    /* width: 150px; */
+    font-weight: 400;
+    font-size: larger;
+}
+
+.FN{
+    width: 105px;
+}
+
+.FDT{
+    width: 135px;
+}
+
+.FM{
+    width: 200px;
+    /* color: red; */
+    /* border: 1px red solid; */
+}

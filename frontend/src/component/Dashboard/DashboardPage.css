@@ -1,0 +1,46 @@
+.dashboard{
+    /* width: auto; */
+    display: flex;
+    justify-content: space-between;
+    background-color: #1DB954;
+}
+
+.heading{
+    padding-left: 25px;
+}
+
+h3{
+    color: gray;
+}
+
+.notices{
+    width: 60%;
+
+}
+
+.cardElement .card{
+    background-color: black;
+    color: white;
+}
+
+.cardElement .posterImage{
+    height: 33vh;
+}
+
+.cardElement .image{
+    height: 8vh;
+}
+
+.cardElement .eventName{
+    font-size: large;
+}
+
+.cardElement .eventDes{
+    font-size: medium;
+}
+
+.cardElement .date{
+    font-size: medium;
+    border-top: white 2px solid;
+}
+
