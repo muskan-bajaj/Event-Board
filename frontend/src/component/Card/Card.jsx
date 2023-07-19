@@ -38,11 +38,11 @@ export default function Card(props) {
         </div>
         <div className={cardCSS.button}>
           <button className={cardCSS.fillForm} onClick={fetchForm}>
-            FORM
+            Form
           </button>
           {authContextValue.loggedIn ? (
             <button className={cardCSS.fillForm} onClick={data}>
-              DATA
+              Registrations
             </button>
           ) : (
             <></>

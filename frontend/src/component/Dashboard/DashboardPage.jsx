@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../store/AuthContext";
 
-import "./DashboardPage.css";
+import dashboardCSS from "./DashboardPage.module.css";
 
 import Card from "../Card/Card";
-import Form from "../Form/NoticeForm/NoticeForm";
+import Form from "../Forms/NoticeCreation/Form";
 
 export default function DashboardPage() {
   const [notice, setNotice] = useState(null);
@@ -40,25 +40,14 @@ export default function DashboardPage() {
   // console.log(notice)
 
   return (
-    <div>
-      <div className="dashboard">
-        <div className="notices">
-          <div className="heading">
-            <h1>Welcome!</h1>
-          </div>
-          {notice &&
-            notice.map((data) => {
-              // console.log(data._id)
-              return (
-                <div className="cardElement">
-                  <Card key={data._id} element={data} />
-                </div>
-              );
-            })}
-        </div>
-        <Form />
-        <div></div>
+    <div className={dashboardCSS.dashboard}>
+      <div className={dashboardCSS.notices}>
+        {notice &&
+          notice.map((data) => {
+            return <Card key={data._id} element={data} />;
+          })}
       </div>
+      <Form />
     </div>
   );
 }

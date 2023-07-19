@@ -1,0 +1,52 @@
+.form{
+    background-color: #262626;
+    height: 100%;
+    border-radius: 10px;
+    width: 33%;
+    padding: 30px 35px;
+}
+
+.formHeading{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 500;
+    text-decoration-line: underline;
+}
+
+.inputs{
+    display: grid;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.eventNameF, .eventDesF, .dateF, .posterF{
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+}
+
+.eventNameF input, .eventDesF input, .dateF input, .posterF input{
+    border: none;
+    padding: 16px;
+    border-radius: 5px;
+    background: #1C1C1C;
+    color: white;
+}
+
+.eventNameF input:focus, .eventDesF input:focus, .dateF input:focus, .posterF input:focus{
+    outline: none;
+}
+
+.createNotice{
+    margin-top: 30px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0BA757;
+    cursor: pointer;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 18px;
+    width: 50%;
+}

@@ -1,0 +1,16 @@
+.dashboard{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 30px 0px;
+}
+
+.notices{
+    display: grid;
+    gap: 30px;
+    width: 50%;
+}
+
+.dateF input{
+    width: 93%;
+}
