@@ -1,3 +1,4 @@
+const otpModel = require("../Models/otpModel");
 const userSchema = require("../Models/userModel");
 const jwt = require("jsonwebtoken");
 
@@ -30,4 +31,33 @@ const signup = async (req, res) => {
   }
 };
 
-module.exports = { login, signup };
+const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await userSchema.findOne({ email: email });
+    if (user) {
+      const otp = Math.floor(100000 + Math.random() * 900000);
+      const otpDoc = await otpModel.updateOne({ email, otp });
+      res.status(200).json({ otpDoc, user: "valid" });
+    } else {
+      res.status(200).json({ user: "invalid" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const verifyOTP = async (req, res) => {
+  const { email, otp } = req.body;
+  try {
+    const user = await otpModel.findOne({ email: email });
+    if (user.otp === otp) {
+      res.status(200).json({ verified: "true" });
+    }
+    res.status(200).json({ verified: "false" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { login, signup, forgetPassword, verifyOTP };

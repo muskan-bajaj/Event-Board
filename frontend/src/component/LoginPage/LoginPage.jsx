@@ -7,7 +7,6 @@ import loginCSS from "./LoginPage.module.css";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [id, setId]=useState('');
   const [error, setError] = useState(null);
 
   const authContextValue = useContext(AuthContext);
@@ -50,7 +49,6 @@ export default function LoginPage() {
   return (
     <div className={loginCSS.bkgrd}>
       <form className={loginCSS.login}>
-        {/* <div className="loginForm"> */}
         <div className={loginCSS.emailInput}>
           <label for="email">Email</label>
           <input
@@ -83,7 +81,6 @@ export default function LoginPage() {
             Log In
           </button>
         </div>
-        {/* </div> */}
       </form>
     </div>
   );

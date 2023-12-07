@@ -1,45 +1,80 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './ForgetP.css'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import loginCSS from "../LoginPage.module.css";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [update, setUpdate] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [error, setError] = useState("");
+
+  const redirect = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!update) {
+      const response = await fetch("/api/user/forgetPassword", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const json = await response.json();
+      if (json.user === "invalid") {
+        setError("email not registered");
+      }
+      if (json.user === "valid") {
+        setError("");
+        setUpdate(true);
+      }
+    }
+    if (update) {
+      const response = await fetch("/api/user/verifyOTP", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp }),
+      });
+      const json = await response.json();
+      if (json.verified === "true") {
+        redirect("/resetPassword");
+      }
+    }
+  };
+
   return (
-    <div className='bkgrd'>
-      <div className="kiitLogo">
-        <img className='kLogo' src="https://uploads-ssl.webflow.com/63a4333d6709521275441c77/63f294d8f9b3c8677b30ad6d_kiitlogo.png" alt=''/>
-      </div>
-      <div className="login">
-        <div className='black'>
-          <div className="loginForm">
-            <div className='loginHeading'>
-              Forget Password
-            </div>
-            <div className="emailOTP">
-                <div className="emailInput">
-                    <label for="email">
-                        <span className='span'>Email</span>
-                        <input type="email" id='email' className='email' placeholder='username@gmail.com'/>
-                    </label>
-                </div>
-                <div className="otp">
-                    <button id='otp'>OTP</button>
-                </div>
-            </div>
-            
-            <div className="passwordInput">
-              <label for="password">
-                <span className='span'>OTP</span>
-                <input type="password" id='password' className='password' placeholder='XX-XX-XX'/>
-              </label>
-            </div>
-            <div className="signIn">
-              <Link to='/dashboard'>
-                <button className='signInButton'>Sign In</button>
-              </Link>
-            </div>
-          </div>
+    <div className={loginCSS.bkgrd}>
+      <form className={loginCSS.login}>
+        <div className={loginCSS.emailInput}>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="username@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
         </div>
-      </div>
+        {update && (
+          <div className={loginCSS.emailInput}>
+            <br />
+            <label for="otp">Enter OTP</label>
+            <input
+              type="number"
+              id="otp"
+              placeholder="Check mail for otp"
+              onChange={(e) => setOtp(e.target.value)}
+              value={otp}
+            />
+          </div>
+        )}
+        <br />
+        <div className={loginCSS.signIn}>
+          {error && <div className={loginCSS.loginError}>{error}</div>}
+          <button className={loginCSS.signInButton} onClick={handleSubmit}>
+            {update ? "Verify OTP" : "Send OTP"}
+          </button>
+        </div>
+      </form>
     </div>
-  )
+  );
 }

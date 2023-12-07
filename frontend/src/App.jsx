@@ -5,7 +5,7 @@ import Navbar from "./component/NavBar/Navbar";
 import Form from "./page/AdminForm";
 import Home from "./page/Home";
 import Login from "./page/Login";
-// import ForgetPassword from "./Page/ForgetPassword";
+import ForgetPassword from "./page/ForgetPassword";
 import Dashboard from "./page/Dashboard";
 import ViewForm from "./page/ViewForm";
 import UserData from "./page/UserData";
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/forgetPassword" element={<ForgetPassword />} /> */}
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
         {authContextValue.loggedIn && (
           <Route path="/dashboard" element={<Dashboard />} />
         )}
