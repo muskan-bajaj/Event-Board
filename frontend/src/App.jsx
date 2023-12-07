@@ -9,6 +9,7 @@ import ForgetPassword from "./page/ForgetPassword";
 import Dashboard from "./page/Dashboard";
 import ViewForm from "./page/ViewForm";
 import UserData from "./page/UserData";
+import ResetPassword from "./page/ResetPassword";
 
 function App() {
   const authContextValue = useContext(AuthContext);
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/resetPassword/:email" element={<ResetPassword />} />
         {authContextValue.loggedIn && (
           <Route path="/dashboard" element={<Dashboard />} />
         )}

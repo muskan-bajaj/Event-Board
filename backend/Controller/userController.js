@@ -1,6 +1,7 @@
 const otpModel = require("../Models/otpModel");
 const userSchema = require("../Models/userModel");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET_KEY, { expiresIn: "1d" });
@@ -26,6 +27,22 @@ const signup = async (req, res) => {
     const jwtToken = createToken(user._id);
 
     res.status(200).json({ email, jwtToken });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  const { email, password } = req.body;
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  try {
+    await userSchema.updateOne(
+      { email: email },
+      { password: hash },
+      { upsert: false }
+    );
+    res.status(200).json({ mssg: "successful" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -60,4 +77,4 @@ const verifyOTP = async (req, res) => {
   }
 };
 
-module.exports = { login, signup, forgetPassword, verifyOTP };
+module.exports = { login, signup, forgetPassword, verifyOTP, resetPassword };

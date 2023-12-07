@@ -36,7 +36,7 @@ export default function LoginPage() {
       });
       const json = await response.json();
       if (json.verified === "true") {
-        redirect("/resetPassword");
+        redirect(`/resetPassword/${email}`);
       }
     }
   };
