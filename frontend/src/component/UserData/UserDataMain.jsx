@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./MainPage.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function UserDataMain(props) {
   const [eventName, setEventName] = useState();
   const [data, setData] = useState([]);
   const [length, setLength] = useState();
-  const redirect = useNavigate();
+  // const redirect = useNavigate();
 
   useEffect(() => {
     const request = async () => {
@@ -18,9 +18,10 @@ export default function UserDataMain(props) {
         },
       });
       const json = await response.json();
+      console.log("-------------------------------------------------------");
       setEventName(json.eventName);
+      console.log("-------------------------------------------------------");
     };
-
     request();
   }, []);
 

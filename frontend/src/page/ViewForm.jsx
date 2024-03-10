@@ -1,45 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../store/AuthContext";
 import UserView from "../component/UserView/UserView";
+import Loading from "../animation/Loading";
 
 export default function ViewForm() {
-  // const [notice, setNotice]=useState(null);
-
   const authContextValue = useContext(AuthContext);
-
   const id = localStorage.getItem("id");
-  // var objectArray=[];
+  const [load, setLoad] = useState(true);
 
-  // useEffect(()=>{
   const fetchNotice = async () => {
     const form = await fetch("/api/form");
     const formJson = await form.json();
-    //   console.log(form)
-    //   console.log(formJson)
     for (var i = 0; i < formJson.length; i++) {
       for (var element in formJson[i]) {
-        // console.log(element)
         if (element === "noticeID") {
           if (formJson[i][element] === id) {
-            //   if(noticeF.ok){
-            // objectArray.push(noticeJson[i])
-            //   }
           }
         }
       }
     }
-    // console.log(objectArray)
-    //   setNotice(objectArray)
+    setLoad(false);
   };
   fetchNotice();
-  // },[notice])
 
-  // authContextValue.setNotices(notice);
-  return (
-    <div>
-      {/* {fetchNotice()} */}
-      {/* <ViewForm */}
-      <UserView />
-    </div>
-  );
+  return <div>{load ? <Loading /> : <UserView />}</div>;
 }
