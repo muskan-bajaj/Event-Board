@@ -5,17 +5,19 @@ import dashboardCSS from "./DashboardPage.module.css";
 
 import Card from "../Card/Card";
 import Form from "../Forms/NoticeCreation/Form";
+import Loading from "../../animation/Loading";
 
 export default function DashboardPage() {
   const [notice, setNotice] = useState(null);
   const [array, setArray] = useState([]);
-
+  const [load, setLoad] = useState(false);
   const authContextValue = useContext(AuthContext);
 
   const id = localStorage.getItem("id");
   var objectArray = [];
 
   useEffect(() => {
+    setLoad(true);
     const array = [];
     const fetchNotice = async () => {
       const noticeF = await fetch("/api/notices");
@@ -46,6 +48,7 @@ export default function DashboardPage() {
 
     formExist();
     fetchNotice();
+    setLoad(false);
   }, [notice]);
 
   authContextValue.setNotices(notice);
@@ -55,14 +58,17 @@ export default function DashboardPage() {
   return (
     <div className={dashboardCSS.dashboard}>
       <div className={dashboardCSS.notices}>
-        {notice &&
+        {notice ? (
           notice.map((data) => {
             var button;
             if (array.includes(data._id)) {
               button = true;
             }
             return <Card key={data._id} element={data} form={button} />;
-          })}
+          })
+        ) : (
+          <Loading width="300" height="300" />
+        )}
       </div>
       <Form />
     </div>

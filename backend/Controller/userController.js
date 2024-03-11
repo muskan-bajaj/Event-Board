@@ -69,11 +69,11 @@ const verifyOTP = async (req, res) => {
   try {
     const user = await otpModel.findOne({ email: email });
     if (user.otp === otp) {
-      res.status(200).json({ verified: "true" });
+      return res.status(200).json({ verified: "true" });
     }
-    res.status(200).json({ verified: "false" });
+    return res.status(200).json({ verified: "false" });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 

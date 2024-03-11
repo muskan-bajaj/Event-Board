@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import loginCSS from "../LoginPage.module.css";
 import Loading from "../../../animation/Loading";
 
 export default function ResetP() {
   const { email } = useParams();
-
+  const redirect = useNavigate();
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [error, setError] = useState("");
@@ -23,10 +23,12 @@ export default function ResetP() {
       });
       const json = await response.json();
       console.log(json);
+      setLoad(false);
+      redirect("/login");
     } else {
+      setLoad(false);
       setError("Passwords don't match!");
     }
-    setLoad(false);
   };
 
   return (
@@ -56,7 +58,7 @@ export default function ResetP() {
         <br />
         <div className={loginCSS.signIn}>
           {load ? (
-            <Loading width="400" height="400" />
+            <Loading width="50" height="50" />
           ) : (
             <>
               {error && <div className={loginCSS.loginError}>{error}</div>}
