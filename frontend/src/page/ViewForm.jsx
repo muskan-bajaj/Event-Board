@@ -23,5 +23,7 @@ export default function ViewForm() {
   };
   fetchNotice();
 
-  return <div>{load ? <Loading /> : <UserView />}</div>;
+  return (
+    <div>{load ? <Loading width="400" height="400" /> : <UserView />}</div>
+  );
 }

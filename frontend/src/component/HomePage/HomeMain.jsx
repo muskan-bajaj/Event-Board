@@ -50,7 +50,7 @@ export default function Notice() {
           </div>
         </>
       ) : (
-        <Loading />
+        <Loading width="400" height="400" />
       )}
       {/* <div className={homeCSS.cardElementHome}>
         {notice &&

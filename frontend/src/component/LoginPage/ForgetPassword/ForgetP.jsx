@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import loginCSS from "../LoginPage.module.css";
+import Loading from "../../../animation/Loading";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [update, setUpdate] = useState(false);
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
+  const [load, setLoad] = useState(false);
 
   const redirect = useNavigate();
 
   const handleSubmit = async (e) => {
+    setLoad(true);
     e.preventDefault();
     if (!update) {
       const response = await fetch("/api/user/forgetPassword", {
@@ -39,6 +42,7 @@ export default function LoginPage() {
         redirect(`/resetPassword/${email}`);
       }
     }
+    setLoad(false);
   };
 
   return (
@@ -69,10 +73,16 @@ export default function LoginPage() {
         )}
         <br />
         <div className={loginCSS.signIn}>
-          {error && <div className={loginCSS.loginError}>{error}</div>}
-          <button className={loginCSS.signInButton} onClick={handleSubmit}>
-            {update ? "Verify OTP" : "Send OTP"}
-          </button>
+          {load ? (
+            <Loading width="50" height="50" />
+          ) : (
+            <>
+              {error && <div className={loginCSS.loginError}>{error}</div>}
+              <button className={loginCSS.signInButton} onClick={handleSubmit}>
+                {update ? "Verify OTP" : "Send OTP"}
+              </button>
+            </>
+          )}
         </div>
       </form>
     </div>

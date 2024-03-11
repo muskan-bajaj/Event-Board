@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import loginCSS from "../LoginPage.module.css";
+import Loading from "../../../animation/Loading";
 
 export default function ResetP() {
   const { email } = useParams();
@@ -9,8 +10,10 @@ export default function ResetP() {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [error, setError] = useState("");
+  const [load, setLoad] = useState(false);
 
   const handleSubmit = async (e) => {
+    setLoad(true);
     e.preventDefault();
     if (password === rePassword) {
       const response = await fetch("/api/user/updatePassword", {
@@ -23,6 +26,7 @@ export default function ResetP() {
     } else {
       setError("Passwords don't match!");
     }
+    setLoad(false);
   };
 
   return (
@@ -51,10 +55,16 @@ export default function ResetP() {
         </div>
         <br />
         <div className={loginCSS.signIn}>
-          {error && <div className={loginCSS.loginError}>{error}</div>}
-          <button className={loginCSS.signInButton} onClick={handleSubmit}>
-            Reset Password
-          </button>
+          {load ? (
+            <Loading width="400" height="400" />
+          ) : (
+            <>
+              {error && <div className={loginCSS.loginError}>{error}</div>}
+              <button className={loginCSS.signInButton} onClick={handleSubmit}>
+                Reset Password
+              </button>
+            </>
+          )}
         </div>
       </form>
     </div>

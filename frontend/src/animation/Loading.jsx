@@ -2,7 +2,7 @@ import React from "react";
 import Lottie from "react-lottie";
 import animationData from "./CircleLoading";
 
-export default function Loading() {
+export default function Loading(props) {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -14,7 +14,11 @@ export default function Loading() {
 
   return (
     <div>
-      <Lottie options={defaultOptions} height={400} width={400} />
+      <Lottie
+        options={defaultOptions}
+        height={Number(props.height)}
+        width={Number(props.width)}
+      />
     </div>
   );
 }

@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../store/AuthContext";
 
 import loginCSS from "./LoginPage.module.css";
+import Loading from "../../animation/Loading";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [load, setLoad] = useState(false);
 
   const authContextValue = useContext(AuthContext);
 
@@ -42,8 +44,10 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
+    setLoad(true);
     e.preventDefault();
     fetchFunction();
+    setLoad(false);
   };
 
   return (
@@ -75,11 +79,18 @@ export default function LoginPage() {
             <div className={loginCSS.fpLink}>Forgot Password?</div>
           </Link>
         </div>
+
         <div className={loginCSS.signIn}>
-          {error && <div className={loginCSS.loginError}>{error}</div>}
-          <button className={loginCSS.signInButton} onClick={handleSubmit}>
-            Log In
-          </button>
+          {load ? (
+            <Loading width="400" height="400" />
+          ) : (
+            <>
+              {error && <div className={loginCSS.loginError}>{error}</div>}
+              <button className={loginCSS.signInButton} onClick={handleSubmit}>
+                Log In
+              </button>
+            </>
+          )}
         </div>
       </form>
     </div>
